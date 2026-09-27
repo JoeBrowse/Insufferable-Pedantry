@@ -14,6 +14,9 @@ const OUT = new URL('../data/news-live.js', import.meta.url);
 const MAX_ITEMS = 40;
 const MAX_AGE_DAYS = 548; // about 18 months
 const TIMEOUT_MS = 20000;
+// A judgment must use the phrase this often to count as a capital allowances case,
+// rather than one that mentions it in passing.
+const MIN_CASE_MENTIONS = 6;
 const USER_AGENT = 'InsufferablePedantry/1.0 (+https://github.com/JoeBrowse/Insufferable-Pedantry)';
 
 // Only items that mention one of these in their title or summary are kept.
@@ -73,6 +76,8 @@ function isoDate(value) {
 // ---------------------------------------------------------------- sources
 
 // GOV.UK site search: HMRC and Treasury guidance, policy papers, consultations.
+// Sorting the search by date surfaces anything that says "capital" or
+// "allowances", so take the most relevant results and date-filter them here.
 async function govuk() {
   const queries = [
     'capital allowances',
@@ -85,8 +90,7 @@ async function govuk() {
   for (const q of queries) {
     const params = new URLSearchParams({
       q,
-      order: '-public_timestamp',
-      count: '40',
+      count: '50',
       fields: 'title,link,description,public_timestamp,format,organisations',
     });
     const data = await get(`https://www.gov.uk/api/search.json?${params}`, 'application/json');
@@ -140,9 +144,9 @@ async function camUpdates() {
   });
 }
 
-// Find Case Law (The National Archives): judgments mentioning capital allowances
-// in a case against HMRC.
-async function caselaw() {
+// Find Case Law (The National Archives): cases against HMRC whose judgment
+// actually turns on capital allowances, judged by how often it uses the phrase.
+async function caselaw({ cutoff }) {
   const params = new URLSearchParams({
     query: '"capital allowances"',
     order: '-date',
@@ -152,7 +156,7 @@ async function caselaw() {
     `https://caselaw.nationalarchives.gov.uk/atom.xml?${params}`,
     'application/atom+xml',
   );
-  return entries(xml)
+  const candidates = entries(xml)
     .map((e) => {
       const title = tag(e, 'title');
       const link =
@@ -170,7 +174,25 @@ async function caselaw() {
         url: decodeXml(link),
       };
     })
-    .filter((item) => /revenue (and|&) customs|HMRC/i.test(item.headline));
+    .filter((item) => /revenue (and|&) customs|HMRC/i.test(item.headline))
+    .filter((item) => item.date && item.date >= cutoff && ALLOWED_URL.test(item.url));
+
+  const kept = [];
+  for (const item of candidates) {
+    let text;
+    try {
+      text = await get(`${item.url}/data.xml`, 'application/xml');
+    } catch (err) {
+      console.warn(`  skipped ${item.url}: ${err.message}`);
+      continue;
+    }
+    const mentions = (text.match(/capital allowance/gi) || []).length;
+    const cite = decodeXml((text.match(/<uk:cite>([^<]+)<\/uk:cite>/) || [])[1] || '');
+    console.log(`  ${String(mentions).padStart(4)} mentions  ${item.headline}`);
+    if (mentions < MIN_CASE_MENTIONS) continue;
+    kept.push({ ...item, standfirst: cite ? `${item.standfirst} · ${cite}` : item.standfirst });
+  }
+  return kept;
 }
 
 // legislation.gov.uk: statutory instruments with "capital allowances" in the title.
@@ -180,22 +202,25 @@ async function legislation() {
     `https://www.legislation.gov.uk/uksi/data.feed?${params}`,
     'application/atom+xml',
   );
-  return entries(xml).map((e) => {
-    const id = tag(e, 'id');
-    const url = id.replace(
-      /^http:\/\/www\.legislation\.gov\.uk\/id\//,
-      'https://www.legislation.gov.uk/',
-    );
-    return {
-      id: `leg:${url}`,
-      date: isoDate(tag(e, 'published') || tag(e, 'updated')),
-      tag: 'Legislation',
-      headline: oneLine(tag(e, 'title'), 160),
-      standfirst: oneLine(tag(e, 'summary')) || 'Statutory instrument',
-      source: 'legislation.gov.uk',
-      url,
-    };
-  });
+  // The feed's title search matches the words separately, so check the phrase.
+  return entries(xml)
+    .filter((e) => /capital allowances/i.test(tag(e, 'title')))
+    .map((e) => {
+      const id = tag(e, 'id');
+      const url = id.replace(
+        /^http:\/\/www\.legislation\.gov\.uk\/id\//,
+        'https://www.legislation.gov.uk/',
+      );
+      return {
+        id: `leg:${url}`,
+        date: isoDate(tag(e, 'published') || tag(e, 'updated')),
+        tag: 'Legislation',
+        headline: oneLine(tag(e, 'title'), 160),
+        standfirst: oneLine(tag(e, 'summary')) || 'Statutory instrument',
+        source: 'legislation.gov.uk',
+        url,
+      };
+    });
 }
 
 const SOURCES = { govuk, camUpdates, caselaw, legislation };
@@ -237,7 +262,7 @@ async function main() {
       legislation: 'leg:',
     }[name];
     try {
-      const items = (await fetchSource()).filter((i) => valid(i, cutoff));
+      const items = (await fetchSource({ cutoff })).filter((i) => valid(i, cutoff));
       console.log(`${name}: ${items.length} items`);
       for (const i of items.slice(0, 3)) console.log(`  ${i.date} ${i.headline}`);
       collected.push(...items);
@@ -252,9 +277,8 @@ async function main() {
   const items = collected
     .sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id))
     .filter((i) => {
-      const key = i.url.replace(/\/$/, '').toLowerCase();
-      if (seen.has(key)) return false;
-      seen.add(key);
+      if (seen.has(i.id)) return false;
+      seen.add(i.id);
       return true;
     })
     .slice(0, MAX_ITEMS);
