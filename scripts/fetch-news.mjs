@@ -16,7 +16,7 @@ const MAX_AGE_DAYS = 548; // about 18 months
 const TIMEOUT_MS = 20000;
 // A judgment must use the phrase this often to count as a capital allowances case,
 // rather than one that mentions it in passing.
-const MIN_CASE_MENTIONS = 6;
+const MIN_CASE_MENTIONS = 10;
 const USER_AGENT = 'InsufferablePedantry/1.0 (+https://github.com/JoeBrowse/Insufferable-Pedantry)';
 
 // Only items that mention one of these in their title or summary are kept.
