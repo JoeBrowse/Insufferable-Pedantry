@@ -84,10 +84,10 @@ button {
   color: var(--claret);
 }
 
+/* No tabular figures here: in this face they widen commas too. */
 .meta {
   font-size: 13px;
   color: var(--muted);
-  font-variant-numeric: tabular-nums;
 }
 
 .section-title {
@@ -226,6 +226,27 @@ button {
   text-wrap: balance;
 }
 
+.lead-fact {
+  margin: 0;
+  max-width: 34ch;
+  font-family: var(--display);
+  font-size: clamp(24px, 5.2vw, 32px);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.lead-fact a {
+  text-decoration: none;
+}
+
+.lead-fact a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
 .lead-headline a {
   text-decoration: none;
 }
@@ -281,6 +302,60 @@ button {
   font-size: 20px;
   line-height: 1.25;
   color: var(--ink);
+}
+
+.list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.row-title-small {
+  font-size: 18px;
+}
+
+/* Daily fact */
+
+.fact {
+  display: grid;
+  gap: 10px;
+  padding-block: 24px 22px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.fact-text {
+  margin: 0;
+  max-width: 32ch;
+  font-family: var(--display);
+  font-size: clamp(26px, 6vw, 36px);
+  line-height: 1.22;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.fact-text + .meta {
+  margin: 0;
+}
+
+.fact-row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  padding-block: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.fact-row p {
+  margin: 0;
+}
+
+.fact-row-text {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--text);
 }
 
 .record {
@@ -1217,7 +1292,8 @@ body.is-touring .dock-card.is-spotlit {
     font-size: 11px;
   }
 
-  .row-link {
+  .row-link,
+  .fact-row {
     grid-template-columns: 1fr;
     gap: 2px;
   }

@@ -3,9 +3,11 @@
 A prototype learning game for UK capital allowances. It has three sections,
 each opened from a card at the bottom of the screen:
 
-- **News**: recent CA changes, newest first, each linked to its source.
-- **Diagnosis**: clues arrive one at a time and you name the relief. Solving on an earlier clue scores more points.
 - **Learn**: short Duolingo-style lessons, grouped into units.
+- **Diagnosis**: clues arrive one at a time and you name the relief. Solving on an earlier clue scores more points.
+- **Daily fact**: one capital allowances fact a day, the same for everyone, changing at midnight.
+
+The front page leads with today's fact and lists the latest news. The **News** page shows everything, newest first, with each item linked to its source.
 
 A tour runs the first time the site opens. The **Tour** button replays it.
 
@@ -24,6 +26,7 @@ Everything the site shows lives in `data/`:
 | `news.js`      | hand-picked news items (`id`, `date`, `tag`, `headline`, `standfirst`, `source`, `url`) |
 | `diagnosis.js` | cases: five clues, most oblique first, and an `answer`        |
 | `news-live.js` | the daily feed, written by `scripts/fetch-news.mjs`. Don't edit it by hand |
+| `facts.js`     | daily facts, shown in order, one per day, cycling round |
 | `reliefs.js`   | every relief name the Diagnosis game accepts, with aliases    |
 | `lessons.js`   | units and lessons. A unit with only `preview` shows as "Coming soon" |
 

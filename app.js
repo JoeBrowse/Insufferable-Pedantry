@@ -14,6 +14,7 @@
   const NEWS = mergeNews(DATA.news || [], DATA.liveNews || []);
   const CASES = DATA.cases || [];
   const UNITS = DATA.units || [];
+  const FACTS = DATA.facts || [];
 
   const STORE_KEY = 'insufferable-pedantry.v1';
   const CLUES_PER_CASE = 5;
@@ -27,6 +28,7 @@
     return {
       tutorialDone: false,
       readNews: [],
+      factSeen: null,
       cases: {},
       caseIndex: 0,
       lessons: {},
@@ -158,7 +160,7 @@
 
   // ---------------------------------------------------------------- routing
 
-  const SECTIONS = ['home', 'news', 'diagnosis', 'learn'];
+  const SECTIONS = ['home', 'news', 'diagnosis', 'learn', 'fact'];
   const view = document.getElementById('view');
 
   function currentSection() {
@@ -173,6 +175,7 @@
       news: renderNews,
       diagnosis: renderDiagnosis,
       learn: renderLearn,
+      fact: renderFact,
     };
     view.replaceChildren(renderers[section]());
     updateDock(section);
@@ -198,8 +201,7 @@
       else card.removeAttribute('aria-current');
     });
 
-    const unread = unreadNews().length;
-    setMeta('news', unread ? `${unread} unread` : 'All read');
+    setMeta('fact', state.factSeen === dayKey(new Date()) ? 'Read today' : 'New today');
 
     const played = Object.keys(state.cases).length;
     setMeta('diagnosis', `${played}/${CASES.length} · ${casePoints()} pts`);
@@ -215,21 +217,21 @@
   // ---------------------------------------------------------------- home
 
   function renderHome() {
-    const lead = NEWS[0];
+    const today = factFor(0);
     const next = nextLesson();
     const nextCase = CASES[firstOpenCase()];
+    const latest = NEWS.slice(0, 3);
 
     return h(
       'div',
       null,
-      lead &&
+      today &&
         h(
           'section',
-          { class: 'lead', 'aria-label': 'Latest' },
-          h('span', { class: 'kicker', text: lead.tag }),
-          h('h1', { class: 'lead-headline' }, h('a', { href: '#news', text: lead.headline })),
-          h('p', { class: 'standfirst', text: lead.standfirst }),
-          h('span', { class: 'meta', text: formatDate(lead.date) }),
+          { class: 'lead', 'aria-label': 'Fact of the day' },
+          h('span', { class: 'kicker', text: 'Fact of the day' }),
+          h('p', { class: 'lead-fact' }, h('a', { href: '#fact', text: today.fact.text })),
+          h('span', { class: 'meta', text: today.fact.source }),
         ),
       h('h2', { class: 'list-label', text: 'Up next' }),
       h(
@@ -261,12 +263,101 @@
             ),
           ),
       ),
+      latest.length > 0 &&
+        h(
+          'div',
+          { class: 'list-head' },
+          h('h2', { class: 'list-label', text: 'Latest news' }),
+          h('a', { class: 'text-btn', href: '#news', text: 'All news' }),
+        ),
+      latest.length > 0 &&
+        h(
+          'ul',
+          { class: 'plain-list' },
+          latest.map((item) =>
+            h(
+              'li',
+              null,
+              h(
+                'a',
+                { class: 'row-link', href: '#news' },
+                h('span', { class: 'meta', text: formatDate(item.date) }),
+                h('span', { class: 'row-title row-title-small', text: item.headline }),
+              ),
+            ),
+          ),
+        ),
       h(
         'p',
         { class: 'record' },
         h('span', null, 'Streak ', h('b', { text: plural(liveStreak(), 'day') })),
         h('span', null, 'Learning ', h('b', { text: `${state.xp} XP` })),
         h('span', null, 'Diagnosis ', h('b', { text: plural(casePoints(), 'point') })),
+      ),
+    );
+  }
+
+  // ---------------------------------------------------------------- daily fact
+
+  // Everyone sees the same fact on the same day; the list order is the rotation.
+  function factFor(daysAgo) {
+    if (!FACTS.length) return null;
+    const date = new Date();
+    date.setDate(date.getDate() - daysAgo);
+    const day = Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 864e5);
+    return { fact: FACTS[((day % FACTS.length) + FACTS.length) % FACTS.length], date };
+  }
+
+  function renderFact() {
+    const today = factFor(0);
+    if (!today) return h('p', { class: 'meta', text: 'No facts loaded.' });
+
+    state.factSeen = dayKey(new Date());
+    saveState();
+
+    const earlier = [];
+    for (let i = 1; i <= Math.min(6, FACTS.length - 1); i++) earlier.push(factFor(i));
+    const dayLabel = (d, opts) => d.toLocaleDateString('en-GB', opts);
+
+    return h(
+      'div',
+      null,
+      h(
+        'div',
+        { class: 'section-head' },
+        h('h1', { class: 'section-title', text: 'Daily fact' }),
+        h('span', {
+          class: 'meta',
+          text: dayLabel(today.date, { weekday: 'long', day: 'numeric', month: 'long' }),
+        }),
+      ),
+      h(
+        'article',
+        { class: 'fact' },
+        h('span', { class: 'kicker', text: today.fact.tag }),
+        h('p', { class: 'fact-text', text: today.fact.text }),
+        h('p', { class: 'meta', text: today.fact.source }),
+      ),
+      earlier.length > 0 && h('h2', { class: 'list-label', text: 'Earlier this week' }),
+      h(
+        'ol',
+        { class: 'plain-list' },
+        earlier.map(({ fact, date }) =>
+          h(
+            'li',
+            { class: 'fact-row' },
+            h('span', {
+              class: 'meta',
+              text: dayLabel(date, { weekday: 'short', day: 'numeric', month: 'short' }),
+            }),
+            h(
+              'div',
+              null,
+              h('p', { class: 'fact-row-text', text: fact.text }),
+              h('p', { class: 'meta', text: fact.source }),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -1130,17 +1221,7 @@
   const TOUR = [
     {
       title: 'Insufferable Pedantry',
-      body: 'Capital allowances, gamified. Three sections, one tab each.',
-    },
-    {
-      section: 'news',
-      title: 'News',
-      body: 'What changed in CA, newest first. Unread items are marked.',
-    },
-    {
-      section: 'diagnosis',
-      title: 'Diagnosis',
-      body: 'Clues arrive one at a time. Name the relief. Fewer clues, more points.',
+      body: 'Capital allowances, gamified. Three sections, one card each.',
     },
     {
       section: 'learn',
@@ -1148,8 +1229,18 @@
       body: 'Short lessons by topic. Three hearts each. Keep the streak alive.',
     },
     {
+      section: 'diagnosis',
+      title: 'Diagnosis',
+      body: 'Clues arrive one at a time. Name the relief. Fewer clues, more points.',
+    },
+    {
+      section: 'fact',
+      title: 'Daily fact',
+      body: 'A new capital allowances fact every day, the same one for everyone.',
+    },
+    {
       title: 'Ready',
-      body: 'Replay this any time from Tour, top right.',
+      body: 'News sits on the front page. Replay this tour from Tour, top right.',
     },
   ];
 
