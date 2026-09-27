@@ -3,20 +3,11 @@ window.IP_DATA = window.IP_DATA || {};
 
 window.IP_DATA.liveNews = [
   {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/1280",
-    "date": "2026-09-03",
-    "tag": "Case law",
-    "headline": "Jody Scheckter v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/1280"
-  },
-  {
     "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/305",
     "date": "2026-08-07",
     "tag": "Case law",
     "headline": "FC Shipping Ltd & Anor v The Commissioners for HMRC",
-    "standfirst": "Upper Tribunal (Tax and Chancery Chamber)",
+    "standfirst": "Upper Tribunal (Tax and Chancery Chamber) · [2026] UKUT 305 (TCC)",
     "source": "Find Case Law",
     "url": "https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/305"
   },
@@ -25,7 +16,7 @@ window.IP_DATA.liveNews = [
     "date": "2026-07-28",
     "tag": "Case law",
     "headline": "Perenco UK Limited v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
+    "standfirst": "First-tier Tribunal (Tax Chamber) · [2026] UKFTT 1096 (TC)",
     "source": "Find Case Law",
     "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/1096"
   },
@@ -39,220 +30,130 @@ window.IP_DATA.liveNews = [
     "url": "https://www.gov.uk/hmrc-internal-manuals/capital-allowances-manual/updates"
   },
   {
-    "id": "leg:https://www.legislation.gov.uk/uksi/2026/681",
-    "date": "2026-06-25",
-    "tag": "Legislation",
-    "headline": "The Universal Credit, Housing Benefit and State Pension Credit (Carer’s Allowance Reassessment Capital Disregard) (Amendment) Regulations 2026",
-    "standfirst": "These Regulations amend the State Pension Credit Regulations 2002 (S.I. 2002/1792), the Housing Benefit Regulations 2006 (S.I. 2006/213), the Housing Benefit (Persons who have attained the qualifying age for state pensi…",
-    "source": "legislation.gov.uk",
-    "url": "https://www.legislation.gov.uk/uksi/2026/681"
-  },
-  {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/911",
-    "date": "2026-06-18",
-    "tag": "Case law",
-    "headline": "Mohammed Maasher v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/911"
-  },
-  {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/219",
-    "date": "2026-06-12",
-    "tag": "Case law",
-    "headline": "The Commissioners for HMRC v GCH Corporation Limited & Ors",
-    "standfirst": "Upper Tribunal (Tax and Chancery Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/219"
+    "id": "cam:2026-06-09",
+    "date": "2026-06-09",
+    "tag": "HMRC",
+    "headline": "Capital Allowances Manual: 1 page updated",
+    "standfirst": "CA43150",
+    "source": "HMRC manual",
+    "url": "https://www.gov.uk/hmrc-internal-manuals/capital-allowances-manual/updates"
   },
   {
     "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/696",
     "date": "2026-05-12",
     "tag": "Case law",
     "headline": "Take 3.9 TV Partnership & Ors v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
+    "standfirst": "First-tier Tribunal (Tax Chamber) · [2026] UKFTT 696 (TC)",
     "source": "Find Case Law",
     "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/696"
-  },
-  {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/172",
-    "date": "2026-05-05",
-    "tag": "Case law",
-    "headline": "Henry Gwyn-Jones v The Commissioners for HMRC",
-    "standfirst": "Upper Tribunal (Tax and Chancery Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/172"
-  },
-  {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/566",
-    "date": "2026-04-10",
-    "tag": "Case law",
-    "headline": "Centrica Energy Storage Limited v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/566"
   },
   {
     "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/142",
     "date": "2026-04-07",
     "tag": "Case law",
     "headline": "Cats North Sea Limited v The Commissioners for HMRC",
-    "standfirst": "Upper Tribunal (Tax and Chancery Chamber)",
+    "standfirst": "Upper Tribunal (Tax and Chancery Chamber) · [2026] UKUT 142 (TCC)",
     "source": "Find Case Law",
     "url": "https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/142"
   },
   {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/143",
-    "date": "2026-04-07",
-    "tag": "Case law",
-    "headline": "Bilfinger Salamis UK Limited v The Commissioners for HMRC",
-    "standfirst": "Upper Tribunal (Tax and Chancery Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/143"
+    "id": "govuk:/government/publications/capital-allowances-and-balancing-charges-hs252-self-assessment-helpsheet",
+    "date": "2026-04-05",
+    "tag": "HMRC",
+    "headline": "Capital allowances and balancing charges (Self Assessment helpsheet HS252)",
+    "standfirst": "Use Self Assessment helpsheet HS252 to help you fill in the capital allowances boxes on your tax return.",
+    "source": "GOV.UK",
+    "url": "https://www.gov.uk/government/publications/capital-allowances-and-balancing-charges-hs252-self-assessment-helpsheet"
   },
   {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/484",
-    "date": "2026-03-27",
-    "tag": "Case law",
-    "headline": "Yasir Badoume v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/484"
+    "id": "govuk:/guidance/capital-allowances-accounting-periods-which-are-more-or-less-than-a-year",
+    "date": "2026-03-31",
+    "tag": "HMRC",
+    "headline": "Capital allowances: accounting periods which are more or less than a year",
+    "standfirst": "Guidance for claiming annual investment allowance, small pools allowance and writing down allowance for accounting periods that are more or less than a year.",
+    "source": "GOV.UK",
+    "url": "https://www.gov.uk/guidance/capital-allowances-accounting-periods-which-are-more-or-less-than-a-year"
   },
   {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ewhc/admin/2026/733",
-    "date": "2026-03-26",
-    "tag": "Case law",
-    "headline": "Christopher Rokos, R (on the application of) v The Commissioners for HMRC",
-    "standfirst": "High Court (Administrative Court)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ewhc/admin/2026/733"
+    "id": "cam:2026-03-30",
+    "date": "2026-03-30",
+    "tag": "HMRC",
+    "headline": "Capital Allowances Manual: 1 page updated",
+    "standfirst": "CA23220",
+    "source": "HMRC manual",
+    "url": "https://www.gov.uk/hmrc-internal-manuals/capital-allowances-manual/updates"
   },
   {
     "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/112",
     "date": "2026-03-11",
     "tag": "Case law",
     "headline": "The Commissioners for HMRC v Shaun Harte",
-    "standfirst": "Upper Tribunal (Tax and Chancery Chamber)",
+    "standfirst": "Upper Tribunal (Tax and Chancery Chamber) · [2026] UKUT 112 (TCC)",
     "source": "Find Case Law",
     "url": "https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/112"
   },
   {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/316",
-    "date": "2026-02-26",
-    "tag": "Case law",
-    "headline": "NNB Generation Company (HPC) Limited v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/316"
+    "id": "cam:2026-02-10",
+    "date": "2026-02-10",
+    "tag": "HMRC",
+    "headline": "Capital Allowances Manual: 4 pages updated",
+    "standfirst": "CA23135, CA23140, CA23141, CA23175",
+    "source": "HMRC manual",
+    "url": "https://www.gov.uk/hmrc-internal-manuals/capital-allowances-manual/updates"
   },
   {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/76",
-    "date": "2026-02-17",
-    "tag": "Case law",
-    "headline": "Steven James Czerwionka v The Commissioners for HMRC",
-    "standfirst": "Upper Tribunal (Tax and Chancery Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/76"
+    "id": "govuk:/hmrc-internal-manuals/capital-allowances-manual",
+    "date": "2025-07-08",
+    "tag": "HMRC",
+    "headline": "Capital Allowances Manual",
+    "standfirst": "Definition of capital allowances, how allowances are made and how to claim",
+    "source": "GOV.UK",
+    "url": "https://www.gov.uk/hmrc-internal-manuals/capital-allowances-manual"
   },
   {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/27",
-    "date": "2026-01-21",
-    "tag": "Case law",
-    "headline": "BTR Core Fund JPUT v The Commissioners for HMRC",
-    "standfirst": "Upper Tribunal (Tax and Chancery Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/27"
+    "id": "govuk:/government/publications/annual-investment-allowance-efficacy-review",
+    "date": "2025-05-28",
+    "tag": "HMRC",
+    "headline": "Annual Investment Allowance Efficacy Review",
+    "standfirst": "HM Revenue and Customs commissioned IFF to conduct a qualitative evaluation of the Annual Investment Allowance tax relief, sometimes known as AIA in 2018.",
+    "source": "GOV.UK",
+    "url": "https://www.gov.uk/government/publications/annual-investment-allowance-efficacy-review"
   },
   {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/1598",
-    "date": "2025-12-16",
-    "tag": "Case law",
-    "headline": "Mumtaz Hussain v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/1598"
+    "id": "govuk:/government/publications/evaluation-of-the-annual-investment-allowance",
+    "date": "2025-05-28",
+    "tag": "HMRC",
+    "headline": "Evaluation of the Annual Investment Allowance",
+    "standfirst": "HM Revenue and Customs commissioned IFF to conduct mixed methods analysis (including econometric analysis) of the Annual Investment Allowance tax relief in 2022",
+    "source": "GOV.UK",
+    "url": "https://www.gov.uk/government/publications/evaluation-of-the-annual-investment-allowance"
   },
   {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/1537",
-    "date": "2025-12-11",
-    "tag": "Case law",
-    "headline": "Richard Thomas v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/1537"
+    "id": "govuk:/government/publications/oil-and-gas-first-year-capital-allowances-for-plant-and-machinery",
+    "date": "2025-05-27",
+    "tag": "HMRC",
+    "headline": "Oil and Gas First Year Capital Allowances for plant and machinery",
+    "standfirst": "HM Revenue and Customs (HMRC) commissioned Ipsos to conduct a qualitative evaluation of the Oil and Gas First Year Capital Allowances for plant and machinery.",
+    "source": "GOV.UK",
+    "url": "https://www.gov.uk/government/publications/oil-and-gas-first-year-capital-allowances-for-plant-and-machinery"
   },
   {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/1250",
-    "date": "2025-10-16",
-    "tag": "Case law",
-    "headline": "Tyler Security Limited v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/1250"
+    "id": "govuk:/government/publications/research-on-capital-allowances",
+    "date": "2025-05-27",
+    "tag": "HMRC",
+    "headline": "Research on Capital Allowances",
+    "standfirst": "HM Revenue and Customs (HMRC) commissioned IFF to undertake research with claimants and eligible non-claimants of Capital Allowances.",
+    "source": "GOV.UK",
+    "url": "https://www.gov.uk/government/publications/research-on-capital-allowances"
   },
   {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/1020",
-    "date": "2025-08-21",
-    "tag": "Case law",
-    "headline": "Moses Mukuna v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/1020"
-  },
-  {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/1016",
-    "date": "2025-08-19",
-    "tag": "Case law",
-    "headline": "William Andrew Tinkler v The Commissioners For HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/1016"
-  },
-  {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ewca/civ/2025/796",
-    "date": "2025-06-26",
-    "tag": "Case law",
-    "headline": "Marlborough DP Limited v Commissioners for HMRC",
-    "standfirst": "Court of Appeal (Civil Division)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ewca/civ/2025/796"
-  },
-  {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukut/tcc/2025/165",
-    "date": "2025-06-03",
-    "tag": "Case law",
-    "headline": "Roger Murphy v The Commissioners for HMRC",
-    "standfirst": "Upper Tribunal (Tax and Chancery Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukut/tcc/2025/165"
-  },
-  {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukut/tcc/2025/143",
-    "date": "2025-05-06",
-    "tag": "Case law",
-    "headline": "Rettig Heating Group UK Limited (in liquidation), R (on the application of) v The Commissioners for HMRC",
-    "standfirst": "Upper Tribunal (Tax and Chancery Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukut/tcc/2025/143"
-  },
-  {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/495",
+    "id": "cam:2025-05-01",
     "date": "2025-05-01",
-    "tag": "Case law",
-    "headline": "Charlotte Macdonald v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/495"
-  },
-  {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/402",
-    "date": "2025-04-04",
-    "tag": "Case law",
-    "headline": "The Vaccine Research Limited Partnership & Anor v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2025/402"
+    "tag": "HMRC",
+    "headline": "Capital Allowances Manual: 1 page updated",
+    "standfirst": "CA23174AB",
+    "source": "HMRC manual",
+    "url": "https://www.gov.uk/hmrc-internal-manuals/capital-allowances-manual/updates"
   }
 ];
 
