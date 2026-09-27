@@ -1,0 +1,41 @@
+# Refreshes data/news-live.js from public sources once a day, and commits it
+# only when something changed. The push redeploys GitHub Pages.
+name: Update news
+
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-news
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch news
+        run: node scripts/fetch-news.mjs
+
+      - name: Commit if changed
+        run: |
+          if [ -z "$(git status --porcelain -- data/news-live.js)" ]; then
+            echo "No new items."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/news-live.js
+          git commit -m 'Update news feed'
+          git push

@@ -11,7 +11,7 @@
 
   const DATA = window.IP_DATA || {};
   const RELIEFS = DATA.reliefs || [];
-  const NEWS = (DATA.news || []).slice().sort((a, b) => b.date.localeCompare(a.date));
+  const NEWS = mergeNews(DATA.news || [], DATA.liveNews || []);
   const CASES = DATA.cases || [];
   const UNITS = DATA.units || [];
 
@@ -56,6 +56,15 @@
   }
 
   // ---------------------------------------------------------------- helpers
+
+  // Hand-picked items win over the daily feed when both link to the same page.
+  function mergeNews(curated, live) {
+    const key = (n) => n.url.replace(/\/$/, '').toLowerCase();
+    const seen = new Set(curated.map(key));
+    return curated
+      .concat(live.filter((n) => !seen.has(key(n))))
+      .sort((a, b) => b.date.localeCompare(a.date));
+  }
 
   function h(tag, attrs, ...children) {
     const el = document.createElement(tag);
@@ -280,6 +289,11 @@
         h('h1', { class: 'section-title', text: 'News' }),
         h('span', { class: 'meta', text: plural(unread.size, 'new item') }),
       ),
+      DATA.liveNewsUpdated &&
+        h('p', {
+          class: 'meta news-feed-note',
+          text: `Checked daily: GOV.UK, HMRC manuals, legislation.gov.uk, Find Case Law. Last change ${formatDate(DATA.liveNewsUpdated)}.`,
+        }),
       h(
         'ul',
         { class: 'news-list' },

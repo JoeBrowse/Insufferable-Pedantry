@@ -407,6 +407,11 @@ button {
   line-height: 1.5;
 }
 
+.news-feed-note {
+  margin: 0;
+  padding-block: 10px 0;
+}
+
 .news-source {
   color: var(--oxford);
   text-decoration: none;
