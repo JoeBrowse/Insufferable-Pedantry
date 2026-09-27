@@ -1,5 +1,5 @@
 /*
- * Insufferable Pedant: prototype app.
+ * Insufferable Pedantry: prototype app.
  *
  * No framework and no build step, so it opens straight from disk. Content lives
  * in data/*.js; this file only renders it. Progress is kept in localStorage,
@@ -15,7 +15,7 @@
   const CASES = DATA.cases || [];
   const UNITS = DATA.units || [];
 
-  const STORE_KEY = 'insufferable-pedant.v1';
+  const STORE_KEY = 'insufferable-pedantry.v1';
   const CLUES_PER_CASE = 5;
   const HEARTS = 3;
   const XP_PER_LESSON = 10;
@@ -1115,7 +1115,7 @@
 
   const TOUR = [
     {
-      title: 'Insufferable Pedant',
+      title: 'Insufferable Pedantry',
       body: 'Capital allowances, gamified. Three sections, one tab each.',
     },
     {

@@ -1,4 +1,4 @@
-# Insufferable Pedant
+# Insufferable Pedantry
 
 A prototype learning game for UK capital allowances. It has three sections,
 each opened from a card at the bottom of the screen:
@@ -11,7 +11,7 @@ A tour runs the first time the site opens. The **Tour** button replays it.
 
 ## Run it
 
-Live at https://joebrowse.github.io/insufferable-pedantry/ (GitHub Pages, from the `gh-pages` branch).
+Live at https://joebrowse.github.io/Insufferable-Pedantry/ (GitHub Pages, from the `gh-pages` branch).
 
 Locally: open `index.html` in a browser. There is no build step and nothing to install.
 
