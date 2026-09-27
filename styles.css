@@ -193,10 +193,14 @@ button {
 
 .tagline {
   margin: 0;
+  max-width: 44ch;
   font-family: var(--display);
   font-style: italic;
-  font-size: 15px;
+  font-size: 14px;
+  line-height: 1.35;
   color: var(--muted);
+  text-align: center;
+  text-wrap: balance;
 }
 
 .view {
