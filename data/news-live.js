@@ -39,15 +39,6 @@ window.IP_DATA.liveNews = [
     "url": "https://www.gov.uk/hmrc-internal-manuals/capital-allowances-manual/updates"
   },
   {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/696",
-    "date": "2026-05-12",
-    "tag": "Case law",
-    "headline": "Take 3.9 TV Partnership & Ors v The Commissioners for HMRC",
-    "standfirst": "First-tier Tribunal (Tax Chamber) · [2026] UKFTT 696 (TC)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukftt/tc/2026/696"
-  },
-  {
     "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/142",
     "date": "2026-04-07",
     "tag": "Case law",
@@ -82,15 +73,6 @@ window.IP_DATA.liveNews = [
     "standfirst": "CA23220",
     "source": "HMRC manual",
     "url": "https://www.gov.uk/hmrc-internal-manuals/capital-allowances-manual/updates"
-  },
-  {
-    "id": "caselaw:https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/112",
-    "date": "2026-03-11",
-    "tag": "Case law",
-    "headline": "The Commissioners for HMRC v Shaun Harte",
-    "standfirst": "Upper Tribunal (Tax and Chancery Chamber) · [2026] UKUT 112 (TCC)",
-    "source": "Find Case Law",
-    "url": "https://caselaw.nationalarchives.gov.uk/ukut/tcc/2026/112"
   },
   {
     "id": "cam:2026-02-10",
