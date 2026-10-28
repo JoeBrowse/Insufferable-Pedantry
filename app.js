@@ -128,6 +128,73 @@
     return `${n} ${n === 1 ? one : many || `${one}s`}`;
   }
 
+  // ---------------------------------------------------------------- sources
+
+  // Errors are reported as GitHub issues on the public repo, pre-filled.
+  const REPORT_URL = 'https://github.com/JoeBrowse/Insufferable-Pedantry/issues/new';
+
+  function sourceLabel(id) {
+    return id
+      .replace(/^HMRC (CA\w+)$/, 'HMRC manual $1')
+      .replace(/^(CAA 2001|CTA 2009|TCGA 1992|FA 1998) /, '$1, ');
+  }
+
+  function uniqueSources(list) {
+    const seen = new Set();
+    return (list || []).filter((s) => s && s.url && !seen.has(s.id) && seen.add(s.id));
+  }
+
+  // Links to each source; with quotes on, a disclosure shows the exact words relied on.
+  function renderSources(list, { quotes = false, max = 4 } = {}) {
+    const items = uniqueSources(list).slice(0, max);
+    if (!items.length) return null;
+    const links = h(
+      'p',
+      { class: 'sources' },
+      h('span', { class: 'sources-label', text: items.length > 1 ? 'Sources ' : 'Source ' }),
+      items.flatMap((s, i) => [
+        i ? ' · ' : null,
+        h('a', {
+          href: s.url,
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          text: `${sourceLabel(s.id)} ↗`,
+        }),
+      ]),
+    );
+    if (!quotes) return links;
+    return h(
+      'div',
+      { class: 'sources-block' },
+      links,
+      h(
+        'details',
+        { class: 'quotes' },
+        h('summary', { text: 'Quoted text' }),
+        items.map((s) =>
+          h(
+            'blockquote',
+            null,
+            h('p', { text: `“${s.quote}”` }),
+            h('cite', { text: sourceLabel(s.id) }),
+          ),
+        ),
+      ),
+    );
+  }
+
+  function reportLink(kind, id, text) {
+    const title = `Possible error: ${kind} ${id}`;
+    const body = `Item: ${kind} ${id}\n\n> ${text}\n\nWhat is wrong, and the authority:\n`;
+    return h('a', {
+      class: 'report-link',
+      href: `${REPORT_URL}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`,
+      target: '_blank',
+      rel: 'noopener noreferrer',
+      text: 'Spot an error?',
+    });
+  }
+
   // ---------------------------------------------------------------- derived figures
 
   function unreadNews() {
@@ -337,6 +404,8 @@
         h('span', { class: 'kicker', text: today.fact.tag }),
         h('p', { class: 'fact-text', text: today.fact.text }),
         h('p', { class: 'meta', text: today.fact.source }),
+        renderSources(today.fact.sources, { quotes: true }),
+        reportLink('fact', today.fact.id, today.fact.text),
       ),
       earlier.length > 0 && h('h2', { class: 'list-label', text: 'Earlier this week' }),
       h(
@@ -354,7 +423,7 @@
               'div',
               null,
               h('p', { class: 'fact-row-text', text: fact.text }),
-              h('p', { class: 'meta', text: fact.source }),
+              renderSources(fact.sources) || h('p', { class: 'meta', text: fact.source }),
             ),
           ),
         ),
@@ -678,6 +747,11 @@
       h('p', { class: 'verdict-answer', text: c.answer }),
       h('p', { class: 'verdict-explain', text: c.explain }),
       h('p', { class: 'meta', text: c.ref }),
+      renderSources([...(c.sources || []), ...(c.clueSources || []).flat()], {
+        quotes: true,
+        max: 6,
+      }),
+      reportLink('case', c.id, c.answer),
       h(
         'div',
         { class: 'guess-actions' },
@@ -889,8 +963,12 @@
       widget.lock(correct);
       foot.classList.add(correct ? 'is-correct' : 'is-wrong');
       feedback.replaceChildren(
-        h('p', { class: 'feedback-title', text: correct ? 'Correct' : `Answer: ${answerText}` }),
-        h('p', { class: 'feedback-body', text: q.explain }),
+        ...[
+          h('p', { class: 'feedback-title', text: correct ? 'Correct' : `Answer: ${answerText}` }),
+          h('p', { class: 'feedback-body', text: q.explain }),
+          renderSources(q.sources, { max: 2 }),
+          reportLink('question', session.lesson.id, q.prompt),
+        ].filter(Boolean),
       );
       session.queue.shift();
       if (correct) {
